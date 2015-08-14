@@ -1,4 +1,4 @@
-require './lib/envme.rb'
+require 'spec_helper'
 
 describe Envme do
   before(:each) do

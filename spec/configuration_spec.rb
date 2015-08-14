@@ -1,4 +1,4 @@
-require './lib/envme/configuration.rb'
+require 'spec_helper'
 
 describe "Envme" do
   describe "configuration" do

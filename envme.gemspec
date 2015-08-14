@@ -13,4 +13,5 @@ Gem::Specification.new "envme", Envme::VERSION do |spec|
   spec.add_development_dependency "rake", "~> 10.4"
   spec.add_development_dependency "rspec", "~> 3.3"
   spec.add_development_dependency "gem-release", "~> 0.7"
+  spec.add_development_dependency "simplecov", "~> 0.9"
 end
