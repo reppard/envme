@@ -9,8 +9,8 @@ Gem::Specification.new "envme", Envme::VERSION do |spec|
 
   spec.files         = `git ls-files lib README.md spec`.split($/)
 
-  spec.add_development_dependency "bundler", "~> 1.10.6"
-  spec.add_development_dependency "rake", "~> 10.4.2"
-  spec.add_development_dependency "rspec", "~> 3.3.0"
+  spec.add_development_dependency "bundler", "~> 1.10"
+  spec.add_development_dependency "rake", "~> 10.4"
+  spec.add_development_dependency "rspec", "~> 3.3"
   spec.add_development_dependency "gem-release", "~> 0.7"
 end
