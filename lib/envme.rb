@@ -61,12 +61,10 @@ module Envme
 
     private
     def run_cmd(prefix)
-      token = 'anonymous' || self.configuration.acl_token
-
       `envconsul -once \
       -consul #{self.configuration.url} \
       -prefix #{prefix} -upcase \
-      -token #{token} -sanitize env`
+      -token #{self.configuration.acl_token} -sanitize env`
     end
   end
 end

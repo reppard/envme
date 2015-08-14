@@ -24,6 +24,11 @@ describe "Envme" do
         expect(config.url.length).to be > 0
       end
 
+      it "Returns a default token" do
+        expect(config.acl_token).to_not be_nil
+        expect(config.acl_token).to eq('anonymous')
+      end
+
       it "Returns an empty options hash" do
         expect(config.options).to be_a(Hash)
         expect(config.options).to be_empty
