@@ -60,7 +60,6 @@ describe Envme do
   end
 
   context "#sanitize_vars" do
-
     it "santitizes vars" do
       vars = [ 'VAR_ONE=one', 
                'VAR_TWO=two',
@@ -78,6 +77,15 @@ describe Envme do
       results = Envme.sanitize_vars(vars, 'var')
 
       expect(results[0]).to eq('ONE=one')
+    end
+  end
+
+  context "#get_cmd" do
+    it "returns a the expected command" do
+      command  = Envme.get_cmd('test/prefix')
+      expected = "envconsul -once -consul localhost:8500 -prefix test/prefix -upcase -token anonymous -sanitize env"
+
+      expect(command).to eq(expected)
     end
   end
 end

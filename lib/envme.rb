@@ -59,12 +59,18 @@ module Envme
       var_collection.collect{ |var| "echo #{var} >> #{filename}"}.join("\n")
     end
 
+    def get_cmd(prefix)
+      [
+        "envconsul -once",
+        "-consul #{self.configuration.url}",
+        "-prefix #{prefix} -upcase",
+        "-token #{self.configuration.acl_token} -sanitize env"
+      ].join(' ')
+    end
+
     private
     def run_cmd(prefix)
-      `envconsul -once \
-      -consul #{self.configuration.url} \
-      -prefix #{prefix} -upcase \
-      -token #{self.configuration.acl_token} -sanitize env`
+      `#{get_cmd(prefix)}`
     end
   end
 end
