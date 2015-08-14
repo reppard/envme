@@ -8,6 +8,10 @@ describe "Envme" do
       Envme.configuration = Envme::Configuration.new
     end
 
+    after(:each) do
+      Envme.configuration = Envme::Configuration.new
+    end
+
     it "has configuration block"  do
       expect { |b| Envme.configure(&b) }.to yield_control
     end
@@ -40,7 +44,6 @@ describe "Envme" do
         Envme.configure do |config|
           config.url = "google.com"
           config.acl_token = "f45cbd0b-5022-47ab-8640-4eaa7c1f40f1"
-          config.options = {ssl: { verify: true }}
         end
 
         expect(Envme.configuration.url).to eq("google.com")
