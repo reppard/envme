@@ -40,7 +40,6 @@ describe "Envme" do
 
         expect(Envme.configuration.url).to eq("google.com")
         expect(Envme.configuration.acl_token).to eq("f45cbd0b-5022-47ab-8640-4eaa7c1f40f1")
-        expect(Envme.configuration.options).to eq({ssl: { verify: true }})
       end
     end
   end
