@@ -29,7 +29,9 @@ module Envme
     def self.limit_to_search(vars, search_strings)
       vars.select do |var|
         search_strings.any? do |match|
-          var.split("=")[0].include?(match.upcase)
+          unless var.match(/^=/)
+            var.split("=")[0].include?(match.upcase)
+          end
         end
       end
     end

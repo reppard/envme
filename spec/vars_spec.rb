@@ -44,6 +44,20 @@ describe Envme::Vars do
       expect(vars.size).to eq(3)
       expect(vars[0]).to eq('COMPONENT_PARAM1=first_param')
     end
+
+    it "doesn't raise when 'env' returns a single '='" do
+      envconsul_data = [
+        "COMPONENT_PARAM1=first_param",
+        "COMPONENT_PARAM2=second PaRam",
+        "ENVVAR_PARAM3=env var",
+        "="
+      ].join("\n")
+
+      allow(Envme::CommandRunner).to receive(:run) { envconsul_data }
+      prefix = 'test/prefix'
+
+      expect{Envme::Vars.get_limited(prefix, 'COMPONENT')}.to_not raise_error
+    end
   end
 
   context "#sanitize" do
