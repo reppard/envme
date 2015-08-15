@@ -56,4 +56,26 @@ Envme::Vars.sanitize(vars, 'prefix')
 => ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser"]
 ```
 
+### Building exports and File builder scripts
+
+```ruby
+vars = Envme::Vars.get_limited('test/prefix', 'db')
+=> ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser"]
+
+puts Envme.build_exports(vars)
+
+export DB_ENDPOINT=db.endpoint.com
+export DB_PASSWD=p@s$W0rd
+export DB_USERNAME=dbuser
+
+
+# Build a script to populate a systemd EnvironmentFile
+
+puts Envme.file_builder(vars, '/etc/sysconfig/my_service.service')
+
+echo DB_ENDPOINT=db.endpoint.com >> /etc/sysconfig/my_service.service
+echo DB_PASSWD=p@s$W0rd >> /etc/sysconfig/my_service.service
+echo DB_USERNAME=dbuser >> /etc/sysconfig/my_service.service
+```
+
 Inspired by [Diplomat](https://github.com/WeAreFarmGeek/diplomat)
