@@ -22,11 +22,15 @@ module Envme
     end
 
     def build_exports(var_collection)
-      var_collection.collect{ |var| "export #{var}"}.join("\n")
+      var_collection.collect{ |var|
+        "export #{var}"
+      }.sort.join("\n")
     end
 
     def file_builder(var_collection, filename)
-      var_collection.collect{ |var| "echo #{var} >> #{filename}"}.join("\n")
+      var_collection.collect{ |var|
+        "echo #{var} >> #{filename}"
+      }.sort.join("\n")
     end
   end
 end
