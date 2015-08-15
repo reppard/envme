@@ -1,17 +1,16 @@
 module Envme
   class Vars < Envme::CommandRunner
 
-    def self.get_all(prefix)
-      env = `env`.split("\n")
-      env_vars = run(prefix).split("\n") - env
+    def self.get(prefix, *search_strings)
+      env         = `env`.split("\n")
+      consul_vars = run(prefix).split("\n") - env
+      env_vars    = consul_vars.select{ |var| !var.split("=")[0].nil? }
 
-      env_vars.select{ |var| !var.split("=")[0].nil? }
-    end
-
-    def self.get_limited(prefix, *search_strings)
-      env_vars = get_all(prefix)
-
-      limit_to_search(env_vars, search_strings)
+      if search_strings.empty?
+        env_vars
+      else
+        limit_to_search(env_vars, search_strings)
+      end
     end
 
     def self.sanitize(vars, search)
