@@ -2,7 +2,9 @@ module Envme
   class Vars < Envme::CommandRunner
 
     def self.get_all(prefix)
-      run(prefix).split("\n")
+      env = `env`.split("\n")
+
+      run(prefix).split("\n") - env
     end
 
     def self.get_limited(prefix, *search_strings)
