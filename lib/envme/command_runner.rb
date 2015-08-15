@@ -10,7 +10,7 @@ module Envme
     end
 
     private
-    def run(prefix)
+    def self.run(prefix)
       `#{build_cmd(prefix)}`
     end
   end
