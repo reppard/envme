@@ -3,8 +3,9 @@ module Envme
 
     def self.get_all(prefix)
       env = `env`.split("\n")
+      env_vars = run(prefix).split("\n") - env
 
-      run(prefix).split("\n") - env
+      env_vars.select{ |var| !var.split("=")[0].nil? }
     end
 
     def self.get_limited(prefix, *search_strings)
@@ -29,9 +30,7 @@ module Envme
     def self.limit_to_search(vars, search_strings)
       vars.select do |var|
         search_strings.any? do |match|
-          unless var.match(/^=/)
-            var.split("=")[0].include?(match.upcase)
-          end
+          var.split("=")[0].include?(match.upcase)
         end
       end
     end
