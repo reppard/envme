@@ -80,12 +80,26 @@ describe Envme do
     end
   end
 
+  context "#build_exports" do
+    it "should take a collection and build a list of exports" do
+      data = [ 'VAR_ONE=one', 'VAR_TWO=two', 'VARTHREE=three' ]
+      expected = "export VAR_ONE=one\nexport VAR_TWO=two\nexport VARTHREE=three"
+
+      expect(Envme.build_exports(data)).to eq(expected)
+    end
+  end
+
   context "#get_cmd" do
     it "returns a the expected command" do
       command  = Envme.get_cmd('test/prefix')
       expected = "envconsul -once -consul localhost:8500 -prefix test/prefix -upcase -token anonymous -sanitize env"
 
       expect(command).to eq(expected)
+    end
+  end
+
+  context "#configure" do
+    it "returns a configuration" do
     end
   end
 end
