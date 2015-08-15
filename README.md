@@ -4,7 +4,9 @@ Envme is a Ruby wrapper around hashicorp's [envconsul](https://github.com/hashic
 
 ## Installation
   
-  $ gem install envme
+```shell
+$ gem install envme
+```
 
 Or add to your Gemfile
 
@@ -24,32 +26,36 @@ gem 'envme',  '>=0.1.2'
   end
 ```
 
-### Get all at specified prefix
+### Get
+
+Grab everything at specified prefix:
 
 ```ruby
-Envme::Vars.get_all('test/prefix')
+Envme::Vars.get('test/prefix')
 => ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser", "REST_ENDPOINT=rest.endpoint.com"]
 ```
 
-### Get limited by using a search string
+Limit return by passing in a search string:
 
 ```ruby
-Envme::Vars.get_limited('test/prefix', 'rest')
+Envme::Vars.get('test/prefix', 'rest')
 => ["REST_ENDPOINT=rest.endpoint.com"]
 
-Envme::Vars.get_limited('test/prefix', 'db')
+Envme::Vars.get('test/prefix', 'db')
 => ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser"]
+```
 
-# Using multiple search strings
+Using multiple search strings:
 
-Envme::Vars.get_limited('test/prefix', 'db', 'rest')
+```ruby
+Envme::Vars.get('test/prefix', 'db', 'rest')
 => ["DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser", "REST_ENDPOINT=rest.endpoint.com", "DB_ENDPOINT=db.endpoint.com"]
 ```
 
 ### Sanitizing return values
 
 ```ruby
-vars = Envme::Vars.get_limited('test', 'db')
+vars = Envme::Vars.get('test', 'db')
 => ["PREFIX_DB_ENDPOINT=db.endpoint.com", "PREFIX_DB_PASSWD=p@s$W0rd", "PREFIX_DB_USERNAME=dbuser"]
 
 Envme::Vars.sanitize(vars, 'prefix')
@@ -59,7 +65,7 @@ Envme::Vars.sanitize(vars, 'prefix')
 ### Building exports and File builder scripts
 
 ```ruby
-vars = Envme::Vars.get_limited('test/prefix', 'db')
+vars = Envme::Vars.get('test/prefix', 'db')
 => ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser"]
 
 puts Envme.build_exports(vars)
