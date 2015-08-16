@@ -13,7 +13,7 @@ Or add to your Gemfile
 ```ruby
 source 'https://rubygems.org'
 
-gem 'envme',  '>=0.1.2'
+gem 'envme',  '>=0.2.0'
 ```
 
 ## Usage
@@ -32,34 +32,34 @@ Grab everything at specified prefix:
 
 ```ruby
 Envme::Vars.get('test/prefix')
-=> ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser", "REST_ENDPOINT=rest.endpoint.com"]
+# => ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser", "REST_ENDPOINT=rest.endpoint.com"]
 ```
 
 Limit return by passing in a search string:
 
 ```ruby
 Envme::Vars.get('test/prefix', 'rest')
-=> ["REST_ENDPOINT=rest.endpoint.com"]
+# => ["REST_ENDPOINT=rest.endpoint.com"]
 
 Envme::Vars.get('test/prefix', 'db')
-=> ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser"]
+# => ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser"]
 ```
 
 Using multiple search strings:
 
 ```ruby
 Envme::Vars.get('test/prefix', 'db', 'rest')
-=> ["DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser", "REST_ENDPOINT=rest.endpoint.com", "DB_ENDPOINT=db.endpoint.com"]
+# => ["DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser", "REST_ENDPOINT=rest.endpoint.com", "DB_ENDPOINT=db.endpoint.com"]
 ```
 
 ### Sanitizing return values
 
 ```ruby
 vars = Envme::Vars.get('test', 'db')
-=> ["PREFIX_DB_ENDPOINT=db.endpoint.com", "PREFIX_DB_PASSWD=p@s$W0rd", "PREFIX_DB_USERNAME=dbuser"]
+# => ["PREFIX_DB_ENDPOINT=db.endpoint.com", "PREFIX_DB_PASSWD=p@s$W0rd", "PREFIX_DB_USERNAME=dbuser"]
 
 Envme::Vars.sanitize(vars, 'prefix')
-=> ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser"]
+# => ["DB_ENDPOINT=db.endpoint.com", "DB_PASSWD=p@s$W0rd", "DB_USERNAME=dbuser"]
 ```
 
 ### Building scripts
