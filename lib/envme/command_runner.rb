@@ -9,9 +9,20 @@ module Envme
       ].join(' ')
     end
 
+    def self.error_message
+      [
+        "No envconsul installation found. Make sure envconsul exists in your path.",
+        "Visit https://github.com/hashicorp/envconsul/releases to download envconsul."
+      ].join("\n")
+    end
+
     private
     def self.run(prefix)
-      `#{build_cmd(prefix)}`
+      begin
+        `#{build_cmd(prefix)}`
+      rescue Errno::ENOENT
+        raise error_message
+      end
     end
   end
 end
