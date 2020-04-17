@@ -29,7 +29,7 @@ module Envme
 
     def file_builder(var_collection, filename)
       var_collection.collect{ |var|
-        "echo #{var} >> #{filename}"
+        "echo '#{var}' >> #{filename}"
       }.sort.join("\n")
     end
   end
